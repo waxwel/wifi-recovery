@@ -61,4 +61,12 @@ python work/test_theme_startup.py
 - `outputs/startup_settings.py`：当前用户登录启动配置。
 - `work/test_*.py`：回归验证。
 
-当前仓库未指定开源许可证。
+## 开源许可
+
+本项目原创代码和文档采用 [MIT License](LICENSE)。
+
+Copyright (c) 2026 waxwel
+
+允许使用、修改、分发和商业使用，包括闭源分发；复制或分发本软件或其重要部分时，须保留版权声明和完整许可声明。软件按“原样”提供，不附带任何保证。具体条款以 LICENSE 英文全文为准。
+
+第三方依赖不因本项目采用 MIT 而改变其许可，参见 [第三方声明](THIRD_PARTY_NOTICES.md) 和 [许可文本](licenses/)。分发 EXE 时也应一并提供适用的版权和许可声明。
