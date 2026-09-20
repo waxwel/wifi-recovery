@@ -152,7 +152,7 @@ def build(app):
     for mode_name in ('使用端','共享端'):
         ttk.Radiobutton(mode_row,text=mode_name,value=mode_name,variable=app.mode,style='Mode.TRadiobutton').pack(side='left',padx=(0,6))
     app.mode.trace_add('write',app.mark_dirty)
-    ttk.Label(mode_row,text='共享端在网络恢复后开启移动热点',style='CardMuted.TLabel').pack(side='left',padx=14)
+    ttk.Label(mode_row,text='共享端持续检查并自动开启移动热点',style='CardMuted.TLabel').pack(side='left',padx=14)
     profile=ttk.Frame(settings,style='Card.TFrame'); profile.pack(fill='x',pady=(7,8))
     ttk.Label(profile,text='重连网络',style='Card.TLabel').pack(side='left',padx=(0,14))
     app.wifi_profile=tk.StringVar(value=app.config['wifi_profile'])
@@ -215,7 +215,7 @@ def build(app):
     foot=ttk.Frame(outer); foot.pack(fill='x',pady=(9,0))
     app.footer=ttk.Label(foot,text='本地监控 · 最小化继续运行 · 退出需确认',style='Muted.TLabel',font=('Microsoft YaHei UI',9))
     app.footer.pack(side='left')
-    ttk.Label(foot,text='DESKTOP  /  3.1',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
+    ttk.Label(foot,text='DESKTOP  /  3.2',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
     apply_dpi_layout(app,style)
     rounded_theme.install(root,style,app.ui_scale)
     app.viewport.enable_input(app.ui_scale)

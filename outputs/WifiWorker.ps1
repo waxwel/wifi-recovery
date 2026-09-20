@@ -461,7 +461,24 @@ try {
                 }
             }
         }
-        if ($deviceMode -eq 'host' -and $hotspotPending -and -not (Test-MonitorStop) -and ((Get-Date)-$lastHotspotAttempt).TotalSeconds -ge 30) {
+        # Hotspot health is independent of HTTPS health, including on first startup.
+        # Re-read even during retry cooldown so an external successful start clears errors.
+        if ($deviceMode -eq 'host' -and -not (Test-MonitorStop)) {
+            try {
+                $script:monitorStatus.hotspotState=[string](Get-HotspotManager).TetheringOperationalState
+                switch ($script:monitorStatus.hotspotState) {
+                    'On' { $hotspotPending=$false; $script:monitorStatus.hotspotError=$null }
+                    'Off' { $hotspotPending=$true }
+                    'InTransition' { $hotspotPending=$false; $script:monitorStatus.hotspotError=$null }
+                    default { $hotspotPending=$true; $script:monitorStatus.hotspotError='Hotspot state is not available.' }
+                }
+            } catch {
+                $hotspotPending=$true
+                $script:monitorStatus.hotspotState='Unknown'
+                $script:monitorStatus.hotspotError=$_.Exception.Message
+            }
+        }
+        if ($deviceMode -eq 'host' -and $hotspotPending -and $script:monitorStatus.hotspotState -eq 'Off' -and $phase -ne 'Error' -and $script:wifiLinkStatus -ne 'Disabled' -and -not (Test-MonitorStop) -and ((Get-Date)-$lastHotspotAttempt).TotalSeconds -ge 30) {
             $lastHotspotAttempt=Get-Date
             Write-MonitorStatus 'StartingHotspot'
             try {
@@ -475,11 +492,7 @@ try {
                 Write-MonitorLog "Hotspot recovery failed; retrying in at least 30 seconds: $($_.Exception.Message)"
             }
         }
-        if ($deviceMode -eq 'host' -and -not $hotspotPending) {
-            try { $script:monitorStatus.hotspotState=[string](Get-HotspotManager).TetheringOperationalState }
-            catch { $script:monitorStatus.hotspotState='Unknown' }
-        }
-        if ($hotspotPending) { $phase='HotspotError' }
+        if ($hotspotPending -and $phase -ne 'Error') { $phase='HotspotError' }
         Write-MonitorStatus $phase
         Wait-MonitorDelay $IntervalSeconds
     }
