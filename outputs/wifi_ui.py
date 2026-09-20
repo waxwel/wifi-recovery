@@ -8,6 +8,7 @@ from tkinter import ttk
 import rounded_theme
 import system_theme
 import startup_settings
+from scroll_view import ScrollView
 from icon_payload import ICON_PNG
 
 BG='#edf2f9'
@@ -56,8 +57,8 @@ def build(app):
     style.configure('TEntry',padding=7,fieldbackground='white',bordercolor=LINE)
     style.configure('TSpinbox',padding=6,fieldbackground='white',bordercolor=LINE)
     style.configure('TCombobox',padding=6,fieldbackground='white',bordercolor=LINE)
-    outer=ttk.Frame(root,padding=(24,18,24,12))
-    outer.pack(fill='both',expand=True)
+    app.viewport=ScrollView(root,BG)
+    outer=app.viewport.content
     header=ttk.Frame(outer)
     header.pack(fill='x',pady=(0,10))
     ttk.Label(header,text='Wi-Fi 自动恢复',style='Title.TLabel').pack(side='left')
@@ -214,9 +215,10 @@ def build(app):
     foot=ttk.Frame(outer); foot.pack(fill='x',pady=(9,0))
     app.footer=ttk.Label(foot,text='本地监控 · 最小化继续运行 · 退出需确认',style='Muted.TLabel',font=('Microsoft YaHei UI',9))
     app.footer.pack(side='left')
-    ttk.Label(foot,text='DESKTOP  /  3.0',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
+    ttk.Label(foot,text='DESKTOP  /  3.1',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
     apply_dpi_layout(app,style)
     rounded_theme.install(root,style,app.ui_scale)
+    app.viewport.enable_input(app.ui_scale)
     system_theme.start(app, __import__(__name__))
 
 
@@ -263,7 +265,7 @@ def apply_dpi_layout(app,style):
     x=area.left+(area.right-area.left-width)//2
     y=area.top+max(0,(area.bottom-area.top-height-round(40*scale))//2)
     root.geometry(f'{width}x{height}+{x}+{y}')
-    root.minsize(min(round(900*scale),width),min(round(800*scale),height))
+    root.minsize(min(480,width),min(320,height))
 
 
 def update_profile_hint(app):

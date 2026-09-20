@@ -1,6 +1,6 @@
 # Wi-Fi Recovery / Wi-Fi 自动恢复
 
-Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.0**。
+Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.1**。
 
 ## 功能
 
@@ -9,6 +9,7 @@ Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.0**。
 - 使用端与共享端模式；共享端在网络恢复后尝试开启 Windows 移动热点。
 - 状态概览、响应趋势、运行日志；检测间隔、超时、失败阈值和冷却时间可配置。
 - 圆角界面、高 DPI 支持；启动时读取系统明暗主题，支持手动切换。
+- 小窗口和高缩放下按需显示整页纵向、横向滚动条；支持滚轮、Shift+滚轮横向滚动和键盘焦点自动滚入视野。
 - 安装后支持一次授权启动、可配置登录后自启；最小化继续监控，退出需要确认。
 
 ## 运行
@@ -49,6 +50,7 @@ python work/test_dpi_layout.py
 python work/test_refresh_efficiency.py
 python work/test_system_theme.py
 python work/test_theme_startup.py
+python work/test_scroll_view.py
 ```
 
 这些检查覆盖配置、界面、缩放、主题和模拟监控进程，不实际重启无线网卡。实际驱动恢复与登录自启需要在目标 Windows 设备上验证。

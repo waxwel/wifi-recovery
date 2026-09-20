@@ -12,6 +12,7 @@
 /outputs/*
 !/outputs/WifiRecoveryApp.py
 !/outputs/wifi_ui.py
+!/outputs/scroll_view.py
 !/outputs/rounded_theme.py
 !/outputs/system_theme.py
 !/outputs/startup_settings.py
@@ -32,3 +33,4 @@
 !/work/test_refresh_efficiency.py
 !/work/test_system_theme.py
 !/work/test_theme_startup.py
+!/work/test_scroll_view.py

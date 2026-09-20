@@ -17,6 +17,7 @@ for factor in (float(sys.argv[1]),) if len(sys.argv)>1 else (1,1.5,2,2.5):
         assert abs(ui.ui_scale-factor)<.02
         assert root.winfo_reqwidth()<=1000*factor, (factor,root.winfo_reqwidth())
         assert root.winfo_reqheight()<=850*factor, (factor,root.winfo_reqheight())
-        assert abs(int(ui.table.column('url','width'))-435*factor)<3
+        # Columns can stretch to the scrollable content width; minima remain DPI-scaled.
+        assert abs(int(ui.table.column('url','minwidth'))-80*factor)<3
         print(f'{factor*100:g}%: layout fits; fonts and table geometry scaled')
         root.destroy()
