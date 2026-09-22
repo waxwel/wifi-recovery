@@ -6,6 +6,9 @@ import sys
 
 root = Path(__file__).resolve().parent
 source = root / 'outputs'
+(source / 'authorization_payload.py').write_text(
+    'AUTHORIZATION_SCRIPT = ' + repr((source / 'Enable-OneTimeAuthorization.ps1').read_text(encoding='utf-8-sig')) + '\n',
+    encoding='utf-8')
 worker = (source / 'WifiWorker.ps1').read_bytes()
 (source / 'worker_payload.py').write_text(
     'import base64\nWORKER_BYTES = base64.b64decode(' + repr(base64.b64encode(worker).decode('ascii')) + ')\n',

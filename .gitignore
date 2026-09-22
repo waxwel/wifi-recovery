@@ -16,6 +16,8 @@
 !/outputs/rounded_theme.py
 !/outputs/system_theme.py
 !/outputs/startup_settings.py
+!/outputs/authorization_payload.py
+!/work/test_standalone_startup.py
 !/outputs/worker_payload.py
 !/outputs/icon_payload.py
 !/outputs/WifiWorker.ps1

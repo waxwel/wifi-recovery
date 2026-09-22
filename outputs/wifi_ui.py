@@ -215,7 +215,7 @@ def build(app):
     foot=ttk.Frame(outer); foot.pack(fill='x',pady=(9,0))
     app.footer=ttk.Label(foot,text='本地监控 · 最小化继续运行 · 退出需确认',style='Muted.TLabel',font=('Microsoft YaHei UI',9))
     app.footer.pack(side='left')
-    ttk.Label(foot,text='DESKTOP  /  3.2',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
+    ttk.Label(foot,text='DESKTOP  /  3.3',style='Muted.TLabel',font=('Segoe UI',9)).pack(side='right')
     apply_dpi_layout(app,style)
     rounded_theme.install(root,style,app.ui_scale)
     app.viewport.enable_input(app.ui_scale)

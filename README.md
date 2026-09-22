@@ -1,6 +1,6 @@
 # Wi-Fi Recovery / Wi-Fi 自动恢复
 
-Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.2**。
+Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.3**。
 
 ## 功能
 
@@ -16,7 +16,9 @@ Windows Wi-Fi 网络监控与自动恢复桌面程序，当前版本 **3.2**。
 
 在 Windows 10/11 x64 上运行 `WifiRecovery.exe`，无需安装 Python。网络恢复需要管理员权限。Windows PowerShell 5.1 是运行依赖，通常随系统提供。
 
-独立 EXE 可以直接运行，但便携运行会请求管理员权限。一次授权和登录自启需要先安装到固定目录。在管理员 Windows PowerShell 中进入项目目录并执行：
+独立 EXE 可以直接运行，首次运行时接受管理员授权。在“检测设置 → 开机自启”选择“开启”，程序会自行复制到 `%ProgramFiles%\WifiRecoveryApp`、配置固定的授权启动任务并保存当前用户登录启动项，无需 Python、外部脚本或另行安装。自启使用固定安装副本，因此移动或删除下载的 EXE 不影响登录启动。选择“关闭”会移除登录启动项，保留安装副本和授权任务。配置失败不会新增登录启动项。
+
+如需使用旧式脚本安装流程，也可以在管理员 Windows PowerShell 中执行：
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\outputs\Install-DesktopApp.ps1
@@ -24,7 +26,7 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\outputs\Install-Deskto
 
 执行前需已有 `outputs/WifiRecovery.exe`（从发布页下载或自行构建）。安装脚本与 `Enable-OneTimeAuthorization.ps1` 应保持在同一目录。更新已有安装使用 `outputs/Update-DesktopApp.ps1`。
 
-安装目录为 `%ProgramFiles%\WifiRecoveryApp`，授权任务为 `WifiRecoveryDesktopLaunch`，仅运行固定的已安装程序。日常启动不再请求 UAC；安装或更新仍需要管理员授权。设置页“开机自启”指当前用户登录 Windows 后启动，切换立即保存。其他电脑需要分别安装授权。
+安装目录为 `%ProgramFiles%\WifiRecoveryApp`，授权任务为 `WifiRecoveryDesktopLaunch`，仅运行固定的已安装程序。安装副本启动和登录自启不再请求 UAC；直接运行下载副本、安装或更新仍可能需要管理员授权。设置页“开机自启”指当前用户登录 Windows 后启动，切换立即保存。其他电脑只需运行单个 EXE 并在界面启用自启。
 
 配置、网络配置名称和日志只保存在本机 `%LOCALAPPDATA%\WifiRecoveryApp`，不属于仓库。程序不读取或保存 Wi-Fi 密码。热点名称和密码需要提前在 Windows 设置中配置。
 
