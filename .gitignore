@@ -17,7 +17,6 @@
 !/outputs/system_theme.py
 !/outputs/startup_settings.py
 !/outputs/authorization_payload.py
-!/work/test_standalone_startup.py
 !/outputs/worker_payload.py
 !/outputs/icon_payload.py
 !/outputs/WifiWorker.ps1
@@ -37,3 +36,4 @@
 !/work/test_theme_startup.py
 !/work/test_scroll_view.py
 !/work/Test-HotspotHealth.ps1
+!/work/test_standalone_startup.py
