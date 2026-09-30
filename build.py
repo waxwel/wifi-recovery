@@ -15,6 +15,7 @@ worker = (source / 'WifiWorker.ps1').read_bytes()
     encoding='utf-8')
 subprocess.run([
     sys.executable, '-m', 'PyInstaller', '--noconfirm', '--onefile', '--windowed',
+    '--hidden-import', 'pystray._win32',
     '--icon', str(source / 'WifiRecovery.ico'), '--name', 'WifiRecovery',
     '--add-data', str(root / 'LICENSE') + ';.',
     '--add-data', str(root / 'THIRD_PARTY_NOTICES.md') + ';.',

@@ -13,6 +13,7 @@
 !/outputs/WifiRecoveryApp.py
 !/outputs/wifi_ui.py
 !/outputs/scroll_view.py
+!/outputs/tray_controller.py
 !/outputs/rounded_theme.py
 !/outputs/system_theme.py
 !/outputs/startup_settings.py
@@ -37,3 +38,4 @@
 !/work/test_scroll_view.py
 !/work/Test-HotspotHealth.ps1
 !/work/test_standalone_startup.py
+!/work/test_tray.py

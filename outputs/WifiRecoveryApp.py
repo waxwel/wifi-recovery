@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from worker_payload import WORKER_BYTES
 import wifi_ui
 import startup_settings
+from tray_controller import TrayController
 
 DEFAULTS = dict(schema=6, mode='client', wifi_profile='', interval=15, threshold=3, timeout=8, cooldown=180,
                 urls=['https://www.google.com/generate_204', 'https://github.com/', 'https://www.baidu.com/'])
@@ -165,6 +166,7 @@ class App:
         save_json(monitor.config_path, self.config)
 
         wifi_ui.build(self)
+        self.tray = TrayController(self)
         if autostart:
             monitor.start()
         self.refresh()
@@ -271,7 +273,7 @@ class App:
             return
         if self.stopping and not alive:
             self.stopping = False
-        if self.root.state() == 'iconic' and not self.closing:
+        if (self.root.state() == 'iconic' or self.tray.hidden) and not self.closing:
             # The PowerShell worker keeps monitoring; hidden widgets need no paint.
             self.root.after(500, self.refresh)
             return
